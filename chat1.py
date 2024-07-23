@@ -188,8 +188,8 @@ def process_input(inputs):
         img_pil.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
         image_description = call_llava_api(img_str)
-        print(f"appearance : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} ")
-        return [f"appearance : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} "]
+        print(f"모습 : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} ")
+        return [f"모습 : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} "]
     else:
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():

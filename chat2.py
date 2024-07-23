@@ -113,9 +113,8 @@ style_map = {
 visual_embeddings = model.encode(visual_examples, convert_to_tensor=True)
 visual_embeddings = visual_embeddings.to(device)
 
-# LLaVA API 호출 함수 (가정)
+# LLaVA API 호출 함수
 def call_llava_api(image):
-    # 이 부분은 실제 LLaVA API를 호출하는 코드로 대체해야 합니다.
     llava = Ollama(model="llava-phi3")
     response = llava("Objectively say only what is ", images=[image])
     return response
