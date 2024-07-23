@@ -113,9 +113,8 @@ style_map = {
 visual_embeddings = model.encode(visual_examples, convert_to_tensor=True)
 visual_embeddings = visual_embeddings.to(device)
 
-# LLaVA API 호출 함수 (가정)
+# LLaVA API 호출 함수
 def call_llava_api(image):
-    # 이 부분은 실제 LLaVA API를 호출하는 코드로 대체해야 합니다.
     llava = Ollama(model="llava-phi3")
     response = llava("Objectively say only what is ", images=[image])
     return response
@@ -177,7 +176,7 @@ def process_input(inputs):
         # 시간을 원하는 형식으로 포맷팅합니다
         time_string = current_time.strftime("%Y%m%d_%H%M%S")
 
-        cv2.imwrite(f"./captured/{time_string}.png", frame)
+        cv2.imwrite(f"./captured~/{time_string}.png", frame)
         print("이미지가 저장되었습니다: captured_image.png")
         cap.release()
 
@@ -189,8 +188,8 @@ def process_input(inputs):
         img_pil.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue()).decode()
         image_description = call_llava_api(img_str)
-        print(f"appearance : {image_description}\n{facial_description}\ntone : {text_predict}\n\n{prompt} ")
-        return [f"appearance : {image_description}\n{facial_description}\ntone : {text_predict}\n\n{prompt} "]
+        print(f"appearance : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} ")
+        return [f"appearance : {image_description}\n{facial_description}\n어조 : {text_predict}\n\n{prompt} "]
     else:
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():
@@ -215,15 +214,15 @@ def process_input(inputs):
         # 시간을 원하는 형식으로 포맷팅합니다
         time_string = current_time.strftime("%Y%m%d_%H%M%S")
 
-        cv2.imwrite(f"./captured/{time_string}.png", frame)
+        cv2.imwrite(f"./captured~/{time_string}.png", frame)
         print("이미지가 저장되었습니다: captured_image.png")
         cap.release() 
 
         facial_description = read_emotion(ret=ret, frame=frame)
         text_predict = predict_emotion(prompt)
 
-        print(f"\n{facial_description}\ntone : {text_predict}\n\nprompt : {prompt} ")
-        return [f"\n{facial_description}\ntone : {text_predict}\n\nprompt : {prompt} "]
+        print(f"\n{facial_description}\n어조 : {text_predict}\n\nprompt : {prompt} ")
+        return [f"\n{facial_description}\n어조 : {text_predict}\n\nprompt : {prompt} "]
 
 # Ollama LLM 초기화
 llm = Ollama(model="Bllossom:8B")

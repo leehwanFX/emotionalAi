@@ -111,10 +111,10 @@ def read_emotion(ret, frame):
     # 감정 예측
     pred = model.predict(face_zoom)
 
-    emotions = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+    emotions = ['화남', '혐오', '두려움', '행복함', '슬픔', '놀람', '중립']
     result = ""
     # for emotion, probability in zip(emotions, pred[0]):
     #     result += f"{emotion}: {probability:.3f}\n"
-    result += f"facial expressions: {emotions[np.argmax(pred)]}"
+    result += f"얼굴 표정: {emotions[np.argmax(pred)]}"
 
     return result
